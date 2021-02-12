@@ -37,7 +37,7 @@ class TopicLessonsFragment :
         args.putString(STORY_ID_ARGUMENT_KEY, storyId)
 
       topicLessonsFragment.arguments = args
-      return topicLessonsFragment
+        return topicLessonsFragment
     }
   }
 

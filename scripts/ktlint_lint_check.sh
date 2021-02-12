@@ -14,7 +14,16 @@ else
     jar_file_path="$github_actions_path/oppia-android-tools/ktlint"
 fi
 
-java -jar $jar_file_path --android app/src/**/*.kt data/src/**/*.kt domain/src/**/*.kt testing/src/**/*.kt utility/src/**/*.kt
+#java -jar $jar_file_path --android app/src/**/*.kt data/src/**/*.kt domain/src/**/*.kt testing/src/**/*.kt utility/src/**/*.kt
+committed_files=`git diff --name-only -- '***.kt' HEAD^ HEAD`
+
+if [ -z "$committed_files" ]; then
+    echo No files have been staged,checking all files.
+    #java -jar $jar_file_path --android app/src/**/*.kt data/src/**/*.kt domain/src/**/*.kt testing/src/**/*.kt utility/src/**/*.kt
+else
+    echo "Checking only committed files."
+    java -jar $jar_file_path --android $committed_files
+fi
 
 status=$?
 
